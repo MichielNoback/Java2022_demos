@@ -11,5 +11,9 @@ class MethodsDemoTest {
         MethodsDemo md = new MethodsDemo();
         double triangleSurface = md.getTriangleSurface(2, 3);
         System.out.println("triangleSurface = " + triangleSurface);
+
+        int x = 1/2;
+        System.out.println("x = " + x);
+
     }
 }
