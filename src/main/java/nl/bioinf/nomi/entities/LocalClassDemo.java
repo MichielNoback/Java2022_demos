@@ -9,7 +9,7 @@ public class LocalClassDemo {
     };
 
     public static void main(String[] args) {
-        var zombie = new Walkable() {
+        Walkable zombie = new Walkable() {
             @Override
             public void walk() {
                 System.out.println("zombie walking");
