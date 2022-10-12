@@ -22,7 +22,11 @@ public class ExceptionDemo {
     }
 
     private static void doSecond() {
+        //this is now useless because there is a throw within the catch
+        // so the defaultXvalue will never be used. But I leave it as
+        // example of the other error-handling strategy: local solutions
         int x = defaultXvalue;
+
         try {
             int y = readNextLineOfFile();
             x = 42 / y;
