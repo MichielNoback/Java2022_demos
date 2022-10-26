@@ -5,6 +5,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
 public class Employee {
+    private int ID;
     private LocalDate birthday;
     private String firstName;
     private String lastName;
@@ -78,17 +79,18 @@ public class Employee {
                 '}';
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         Employee employee = (Employee) o;
-        return Double.compare(employee.salary, salary) == 0 && Objects.equals(birthday, employee.birthday) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName);
+
+        return ID == employee.ID;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(birthday, firstName, lastName, salary);
+        return ID;
     }
 }
