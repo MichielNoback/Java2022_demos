@@ -2,22 +2,28 @@ package nl.bioinf.nomi.encapsulation;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Objects;
 
 public class Employee {
-    private final LocalDate birthday;
+    private LocalDate birthday;
     private String firstName;
     private String lastName;
 //    private int age;
     private double salary;
 
     public Employee(String firstName, String lastName, LocalDate birthday, double salary) {
+        Objects.requireNonNull(firstName);
+        Objects.requireNonNull(lastName);
+        //Objects.requireNonNull(birthday);
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthday = birthday;
         this.salary = salary;
+    }
+
+    public Employee(String firstName, String lastName, LocalDate birthday) {
+        this(firstName, lastName, birthday, 0);
     }
 
     public String getFirstName() {
@@ -37,8 +43,12 @@ public class Employee {
 //    }
 
     public long getAge() {
+        if (birthday == null) {
+            System.err.println("age was mnot present for ");
+            return -1;
+        }
         LocalDate now = LocalDate.now();
-        return ChronoUnit.MONTHS.between(birthday, now);
+        return ChronoUnit.YEARS.between(birthday, now);
     }
 
 //    public void setAge(int age) {
@@ -53,15 +63,14 @@ public class Employee {
         return salary;
     }
 
-    protected void setSalary(double salary) {
+    public void setSalary(double salary) {
         if (salary < 0) throw new IllegalArgumentException("Negative salary: " + salary);
-
         this.salary = salary;
     }
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return getClass().getSimpleName() + "{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + getAge() +
